@@ -37,6 +37,11 @@ export async function getQuotes(
   },
 ) {
   const supabase = await createClient()
+  
+  // Get current user to check likes
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   let query = supabase
     .from("quotes")
@@ -73,13 +78,32 @@ export async function getQuotes(
     return []
   }
 
-  return (
-    data?.map((quote) => ({
+  // Check which quotes the current user has liked
+  const quotesWithLikes = await Promise.all(
+    (data || []).map(async (quote) => {
+      let isLiked = false
+      
+      if (user) {
+        const { data: likeData } = await supabase
+          .from("likes")
+          .select("id")
+          .eq("user_id", user.id)
+          .eq("quote_id", quote.id)
+          .single()
+        
+        isLiked = !!likeData
+      }
+      
+      return {
       ...quote,
       likes_count: quote.likes?.[0]?.count || 0,
       comments_count: quote.comments?.[0]?.count || 0,
-    })) || []
+      is_liked: isLiked,
+      }
+    })
   )
+  
+  return quotesWithLikes
 }
 
 export async function getQuoteById(id: string, userId?: string) {

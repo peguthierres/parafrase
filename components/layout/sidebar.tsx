@@ -8,35 +8,35 @@ import Link from "next/link"
 
 const topAuthors = [
   {
-    id: 1,
+    id: "1",
     name: "Aristóteles",
     category: "Filósofo",
     followers: 1250,
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face",
   },
   {
-    id: 2,
+    id: "2",
     name: "Fernando Pessoa",
     category: "Poeta",
     followers: 980,
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
   },
   {
-    id: 3,
+    id: "3",
     name: "Einstein",
     category: "Cientista",
     followers: 875,
     avatar: "https://images.unsplash.com/photo-15602500970b93528c311a?w=40&h=40&fit=crop&crop=face",
   },
   {
-    id: 4,
+    id: "4",
     name: "Gandhi",
     category: "Político",
     followers: 720,
     avatar: "https://images.unsplash.com/photo-1566492031773-4f4e44671d66?w=40&h=40&fit=crop&crop=face",
   },
   {
-    id: 5,
+    id: "5",
     name: "Machado de Assis",
     category: "Escritor",
     followers: 650,
@@ -45,10 +45,10 @@ const topAuthors = [
 ]
 
 const mostRead = [
-  { id: 1, content: "Ser ou não ser, eis a questão.", author: "Shakespeare", views: 2340 },
-  { id: 2, content: "Só sei que nada sei.", author: "Sócrates", views: 1890 },
-  { id: 3, content: "A imaginação é mais importante que o conhecimento.", author: "Einstein", views: 1650 },
-  { id: 4, content: "Seja a mudança que você quer ver no mundo.", author: "Gandhi", views: 1420 },
+  { id: "1", content: "Ser ou não ser, eis a questão.", author: "Shakespeare", views: 2340 },
+  { id: "2", content: "Só sei que nada sei.", author: "Sócrates", views: 1890 },
+  { id: "3", content: "A imaginação é mais importante que o conhecimento.", author: "Einstein", views: 1650 },
+  { id: "4", content: "Seja a mudança que você quer ver no mundo.", author: "Gandhi", views: 1420 },
 ]
 
 export function Sidebar() {

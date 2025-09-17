@@ -26,6 +26,7 @@ export function Header() {
     e.preventDefault()
     if (searchQuery.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchQuery)}`)
+      setSearchQuery("")
     }
   }
 
@@ -103,12 +104,19 @@ export function Header() {
 
         {/* Add Quote Button */}
         <div className="relative z-10 flex justify-center px-4 md:px-6 mt-6">
-          <Button asChild className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-full shadow-lg">
-            <Link href="/add-quote">
-              <span className="mr-2">+</span>
-              Adicionar Frase
-            </Link>
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button asChild className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-full shadow-lg">
+              <Link href="/add-quote">
+                <span className="mr-2">+</span>
+                Adicionar Frase
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="bg-white/90 backdrop-blur-sm px-6 py-2 rounded-full shadow-lg border-white/20">
+              <Link href="/authors">
+                Explorar Autores
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
 
