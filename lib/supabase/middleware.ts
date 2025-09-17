@@ -2,6 +2,26 @@ import { createServerClient } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
 
 export async function updateSession(request: NextRequest) {
+  // Get environment variables
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  // Validate environment variables
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.error('Missing Supabase environment variables')
+    return NextResponse.next({
+      request,
+    })
+  }
+
+  // Validate URL format
+  if (!supabaseUrl.startsWith('http://') && !supabaseUrl.startsWith('https://')) {
+    console.error('Invalid Supabase URL format. Must start with http:// or https://')
+    return NextResponse.next({
+      request,
+    })
+  }
+
   let supabaseResponse = NextResponse.next({
     request,
   })
@@ -9,8 +29,8 @@ export async function updateSession(request: NextRequest) {
   // With Fluid compute, don't put this client in a global environment
   // variable. Always create a new one on each request.
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl,
+    supabaseAnonKey,
     {
       cookies: {
         getAll() {
